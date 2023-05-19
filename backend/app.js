@@ -58,7 +58,7 @@ app.use(express.json())
 
 //routes
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/post', postRouter)
+app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/tag', tagRouter)
 app.use('/api/v1/comment', commentRouter)
 app.use('/api/v1/category', categoryRouter)
