@@ -24,7 +24,7 @@ const connectDB = require('./database/connectDB')
 
 
 //routers
-
+const authRouter = require('./routes/authRoutes')
 
 //middleware
 const notFoundMiddleWare = require('./middleware/not-found')
@@ -51,6 +51,13 @@ app.use(express.json())
 
 
 //routes
+app.use('/api/v1/auth', authRouter)
+
+
+
+
+app.use(errorHandlerMiddleWare)
+app.use(notFoundMiddleWare)
 
 
 
@@ -59,7 +66,7 @@ const port = process.env.PORT || 3000
 //server
 const start = async()=>{
     try {
-        //connectDB(process.env.MONGO_URI)
+        connectDB(process.env.MONGO_URI)
         app.listen(port,()=>{console.log(`server listening on port ${port}`)})
     } catch (error) {
         console.log(error)        
