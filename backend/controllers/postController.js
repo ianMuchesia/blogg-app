@@ -4,7 +4,14 @@ const Post = require("../models/Post");
 const checkPermission = require("../utils/checkPermission");
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find({}).populate({
+
+  const {category } = req.query
+
+  const QueryObject = {}
+  if(category){
+    QueryObject.category = category
+  }
+  const posts = await Post.find(QueryObject).populate({
     path: "user",
     select: "name avatar",
   });

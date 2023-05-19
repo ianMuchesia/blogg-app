@@ -28,7 +28,6 @@ const authRouter = require('./routes/authRoutes')
 const postRouter = require('./routes/postRoutes')
 const tagRouter = require('./routes/tagRoutes')
 const commentRouter = require('./routes/commentRoutes')
-const categoryRouter = require('./routes/categoryRoutes')
 
 
 
@@ -60,8 +59,8 @@ app.use(express.json())
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/tag', tagRouter)
-app.use('/api/v1/comment', commentRouter)
-app.use('/api/v1/category', categoryRouter)
+app.use('/api/v1/comments', commentRouter)
+
 
 
 
