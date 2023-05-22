@@ -15,7 +15,7 @@ cloudinary.config({
 const register = async(req ,res)=>{
     const {name , email , password, avatar, bio, phone } = req.body;
 
-  
+
     if(!name ||!email ||!password){
         throw new BadRequestError("please provide all values")
     }
@@ -51,7 +51,7 @@ const register = async(req ,res)=>{
       attachCookiesToResponse({res , user: tokenUser})
 
 
-     res.status(StatusCodes.CREATED).json({  user: tokenUser });
+     res.status(StatusCodes.CREATED).json({  success:true ,user: tokenUser });
 
 }
 
@@ -87,7 +87,7 @@ const login = async(req , res)=>{
 
     attachCookiesToResponse({ res, user: tokenUser });
 
-    res.status(StatusCodes.CREATED).json({  user: tokenUser });
+    res.status(StatusCodes.CREATED).json({ success:true , user: tokenUser });
 
 }
 
