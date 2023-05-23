@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.2.1",

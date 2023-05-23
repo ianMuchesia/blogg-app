@@ -18,10 +18,14 @@ const PostSchema = new Schema ({
         required:['You cannot submit an empty blog'],
         maxlength: 20000,
     },
+    image:{
+        type:String,
+    },
     tags:[{
         type:mongoose.Schema.ObjectId,
         ref:"Tag"
     }],
+
     category: {
         type: String,
         enum: ['Software Development', 'Others', 'Data Analysis', 'Cyber Security', 'Networking'],

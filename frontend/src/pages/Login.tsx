@@ -30,7 +30,7 @@ const Login = () => {
 
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>)=>{
-
+      e.preventDefault()
         const { email , password } = loginForm
         if(!email || !password){
             toast.error("Please input both password and email")
@@ -84,7 +84,7 @@ const Login = () => {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
                 </h1>
-                <form className="space-y-4 md:space-y-6" action="#">
+                <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                         <input type="email" name="email" id="email"

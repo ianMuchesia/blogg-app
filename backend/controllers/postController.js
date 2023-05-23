@@ -3,6 +3,16 @@ const { NotFoundError, BadRequestError } = require("../errors");
 const Post = require("../models/Post");
 const checkPermission = require("../utils/checkPermission");
 
+const cloudinary = require("cloudinary").v2;
+
+
+// Configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
 const getAllPosts = async (req, res) => {
 
   const {category } = req.query
@@ -37,17 +47,30 @@ const getSinglePost = async (req, res) => {
 
 
 const createPost = async (req, res) => {
-    const { title, content, tags, category } = req.body;
+    const { title, content, tags, category, file } = req.body;
   
+   
     if (!title || !content || !category) {
       throw new BadRequestError("Please provide all values");
     }
   
 
-    req.body.user = req.user.userId;
+ 
   
+    let url=""
+    if(file){
+      
+      const result = await cloudinary.uploader.upload(file); // Assuming `avatar` contains the file data
+      url = result.secure_url;
+    }
     
-    await Post.create(req.body);
+    await Post.create({
+      user:  req.user.userId,
+      title, 
+      content,
+      image:url,
+      category,
+    });
   
     res.status(StatusCodes.CREATED).json({ success: true });
   };
