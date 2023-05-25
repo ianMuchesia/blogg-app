@@ -18,3 +18,10 @@ export interface post{
 }
 
 
+export interface comment{
+  _id:string;
+  name: string;
+  content:string;
+  createdAt:string;
+}
+
