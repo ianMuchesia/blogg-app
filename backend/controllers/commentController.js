@@ -14,7 +14,7 @@ const getComments = async (req, res) => {
 
   const comments = await Comment.find({ post: postID });
 
-  res.status(StatusCodes.OK).json({ comments });
+  res.status(StatusCodes.OK).json( comments );
 };
 
 const createComment = async (req, res) => {

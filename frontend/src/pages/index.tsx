@@ -2,10 +2,21 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import Welcome from '@/components/Welcome'
+import { GetServerSideProps } from 'next'
+import axios from 'axios'
+import { baseURL } from '@/baseURl'
+import { post } from '@/@types/@types'
+import { useEffect } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+interface Props{
+  data: post[];
+}
+export default function Home({data}:Props) {
+  
+  
   return (
     <>
       <Head>
@@ -15,8 +26,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
-
+      <Welcome posts={data}/>
       </div>
     </>
   )
+}
+
+
+export const getServerSideProps:GetServerSideProps<{data:post[]}> = async()=>{
+  const {data} = await axios.get(`${baseURL}/posts`,{
+    withCredentials: true
+  })
+ 
+ 
+  return {
+    props:{data}
+  }
 }
