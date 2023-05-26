@@ -15,6 +15,7 @@ export interface post{
   createdAt:string;
   image:string;
   summary:string;
+  formattedDate:string;
 }
 
 

@@ -31,7 +31,10 @@ const PostSchema = new Schema ({
         enum: ['Software Development', 'Others', 'Data Analysis', 'Cyber Security', 'Networking'],
         required: true,
       },
-
+      summary:{
+        type:String,
+        required:[true,'You must include a summary']
+        },
 
 }, {timestamps:true})
 

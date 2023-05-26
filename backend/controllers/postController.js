@@ -47,8 +47,9 @@ const getSinglePost = async (req, res) => {
 
 
 const createPost = async (req, res) => {
-    const { title, content, tags, category, file } = req.body;
+    const { title, content,summary, tags, category, file } = req.body;
   
+    
    
     if (!title || !content || !category) {
       throw new BadRequestError("Please provide all values");
@@ -70,6 +71,7 @@ const createPost = async (req, res) => {
       content,
       image:url,
       category,
+      summary,
     });
   
     res.status(StatusCodes.CREATED).json({ success: true });

@@ -8,14 +8,16 @@ import axios from 'axios'
 import { baseURL } from '@/baseURl'
 import { post } from '@/@types/@types'
 import { useEffect } from 'react'
+import { formatMongoDate } from '@/utils/utilsDate'
 
 const inter = Inter({ subsets: ['latin'] })
 
 interface Props{
-  data: post[];
+  formattedPosts: post[];
 }
-export default function Home({data}:Props) {
+export default function Home({formattedPosts}:Props) {
   
+  console.log(formattedPosts)
   
   return (
     <>
@@ -26,20 +28,23 @@ export default function Home({data}:Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
-      <Welcome posts={data}/>
+      <Welcome posts={formattedPosts}/>
       </div>
     </>
   )
 }
 
 
-export const getServerSideProps:GetServerSideProps<{data:post[]}> = async()=>{
-  const {data} = await axios.get(`${baseURL}/posts`,{
+export const getServerSideProps:GetServerSideProps = async()=>{
+  const {data} = await axios.get<post[]>(`${baseURL}/posts`,{
     withCredentials: true
   })
  
- 
+  const formattedPosts = data.map((post) => ({
+    ...post,
+    formattedDate: formatMongoDate(post.createdAt),
+  }));
   return {
-    props:{data}
+    props:{formattedPosts}
   }
 }

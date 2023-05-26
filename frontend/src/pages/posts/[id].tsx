@@ -67,22 +67,24 @@ const Post = ({ post, comments }: Props) => {
   };
 
   return (
-    <div className="px-2 py-4">
+    <div className="px-2 py-4 md:px-10">
       <ToastContainer />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center ">
         <img src={image} alt={title} className="max-h-[500px] w-full" />
-        <h1 className="text-4xl md:text-5xl text-center">{title}</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl text-center">{title}</h1>
         <p className="text-xs text-gray-500">posted on: {formatISO9075(new Date(createdAt))}</p>
         
         <img src={user.avatar} alt=""  className="h-14 w-14 rounded-full object-cover mt-5 mb-1"/>
         <p className="text-sm text-gray-500">Author: {user.name}</p>
         <div className="my-3">{parse(postContent)}</div>
       </div>
-      <div className="grid place-items-center grid-cols-1 md:grid-cols-2">
-        <h3 className="text-2xl my-2">{comments.length}{" "}{comments.length===1?"reply":"replies"}</h3>
+
+      <h3 className="text-2xl my-2 text-center">{comments.length}{" "}{comments.length===1?"reply":"replies"}</h3>
+      <div className="grid place-items-center grid-cols-1 ">
+      
         {comments &&
           comments.map((item) => (
-            <div className="bg-gray-200 px-4 py-3" key={item._id}>
+            <div className="bg-gray-200 px-4 py-3 sm:w-[500px]" key={item._id}>
                 <div className="flex items-center justify-between gap-6">
                 <p className="text-xs text-gray-500"><span className="text-sm text-gray-700">
                 By: </span>   {item.name}</p>
@@ -97,15 +99,14 @@ const Post = ({ post, comments }: Props) => {
       <div className="mt-4 flex flex-col items-center">
         <h2 className="text-2xl">Add a Comment</h2>
         <p className="text-center text-base">Your Email address will not be published</p>
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-3 my-3" onSubmit={handleSubmit}>
           <textarea
             placeholder="Message"
             value={form.message}
             name="message"
             onChange={handleChange}
-            cols={30}
-            rows={7}
-            className="p-2"
+           rows={10}
+            className="p-2 w-[250px] sm:w-[500px] md:w-[700px] rounded-lg focus:outline-none"
           />
           <input
             type="text"
@@ -113,7 +114,7 @@ const Post = ({ post, comments }: Props) => {
             value={form.name}
             name="name"
             onChange={handleChange}
-            className="p-2"
+            className="p-3 text-lg rounded-sm focus:outline-none"
           />
           <input
             type="email"
@@ -121,7 +122,7 @@ const Post = ({ post, comments }: Props) => {
             value={form.email}
             name="email"
             onChange={handleChange}
-            className="p-2"
+            className="p-3 text-lg rounded-sm focus:outline-none"
           />
 
           <button className="bg-gray-700 text-white py-2 px-4 rounded-sm">COMMENT</button>
