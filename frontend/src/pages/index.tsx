@@ -17,7 +17,7 @@ interface Props{
 }
 export default function Home({formattedPosts}:Props) {
   
-  console.log(formattedPosts)
+
   
   return (
     <>
